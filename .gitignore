@@ -1,0 +1,5 @@
+secrets/
+__pycache__/
+.pytest_cache/
+.vscode/
+inventory.gcp.yml

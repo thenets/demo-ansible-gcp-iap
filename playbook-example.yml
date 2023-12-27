@@ -1,0 +1,16 @@
+# Example of how to use the `gcp_ssh` connection plugin
+---
+
+- hosts: all
+  gather_facts: false
+  connection: gcp_ssh
+  tasks:
+    - name: "Retrieve hostname"
+      changed_when: false
+      ansible.builtin.command:
+        cmd: hostname
+      register: hostname_output
+
+    - name: "Debug hostname"
+      ansible.builtin.debug:
+        var: hostname_output.stdout

@@ -1,0 +1,25 @@
+---
+plugin: google.cloud.gcp_compute
+service_account_file: <MY_SERVICE_ACCOUNT_FILE_PATH> # <-- change this
+projects:
+  - <MY_PROJECT> # <-- change this
+filters:
+  # Learn more about the filters, check the inventory plugin documentation:
+  # https://docs.ansible.com/ansible/latest/collections/google/cloud/gcp_compute_inventory.html#parameter-filters
+  # and Google's documentation:
+  # https://cloud.google.com/compute/docs/reference/rest/v1/instances/aggregatedList
+  - status = RUNNING
+auth_kind: serviceaccount
+scopes:
+ - 'https://www.googleapis.com/auth/cloud-platform'
+ - 'https://www.googleapis.com/auth/compute.readonly'
+keyed_groups:
+  - prefix: aap
+    key: application
+hostnames:
+  - name
+compose:
+  gcp_zone: zone
+  gcp_region: networkInterfaces[0].subnetwork.region
+  gcp_compute_ssh_flags: "--tunnel-through-iap --no-user-output-enabled --quiet"
+  gcp_compute_scp_flags: "--tunnel-through-iap --quiet"
