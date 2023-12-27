@@ -1,5 +1,6 @@
 ---
 plugin: google.cloud.gcp_compute
+service_account_file: <MY_SERVICE_ACCOUNT_FILE_PATH> # <-- change this
 projects:
   - <MY_PROJECT> # <-- change this
 filters:
