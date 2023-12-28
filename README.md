@@ -1,16 +1,16 @@
-# How to use connect Ansible using GCP IAP
+# How connect Ansible using GCP IAP
 
 Example of how to use GCP IAP to connect to a VM using Ansible.
 
 ## Why
 
-Ansible is a great tool to automate tasks on VMs. By default, Ansible uses SSH to connect to the VMs and execute the tasks. When VMs are isolated in a private network, like in a [GCP Virtual Private Cloud network](https://cloud.google.com/vpc/docs/vpc), it is not possible to connect to the VMs using SSH directly and the connection must be routed through a VPN or a bastion host.
+Ansible is a great tool to automate tasks on VMs. By default, Ansible uses SSH to connect to the VMs and execute the tasks. When VMs are isolated in a private network, like in a [GCP Virtual Private Cloud network](https://cloud.google.com/vpc/docs/vpc), it is not possible to connect to the VMs using SSH directly, and the connection must be routed through a VPN or a bastion host.
 
-Alternatively, it is possible to use [GCP Identity-Aware Proxy (IAP)](https://cloud.google.com/iap/docs/using-tcp-forwarding) to connect to the VMs. There's no official support for Ansible to use IAP, but this project aims to provide an example, with a specific [Ansible Connection Plugin](https://docs.ansible.com/ansible/latest/plugins/connection.html) to connect to the VMs using IAP.
+Alternatively, it is possible to use [GCP Identity-Aware Proxy (IAP)](https://cloud.google.com/iap/docs/using-tcp-forwarding) to connect to the VMs. There's no official support for Ansible to use IAP, but this project aims to provide an example with a specific [Ansible Connection Plugin](https://docs.ansible.com/ansible/latest/plugins/connection.html) to connect to the VMs using IAP.
 
 ## How it works
 
-The [Ansible Connection Plugin](https://docs.ansible.com/ansible/latest/plugins/connection.html) is a Python script that is executed by Ansible to connect to the VMs. The script is responsible to invoke the `gcloud compute [ssh|scp]` commands to connect to the VMs using IAP. In practice, the script will be transparently replacing the SSH connection.
+The [Ansible Connection Plugin](https://docs.ansible.com/ansible/latest/plugins/connection.html) is a Python script that Ansible executes to connect to the VMs. The script invokes the `gcloud compute [ssh|scp]` commands to connect to the VMs using IAP. In practice, the script will transparently replace the SSH connection.
 
 ![Connection to the VM via GCP IAP](./docs/diagram.drawio.svg)
 
